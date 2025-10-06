@@ -18,7 +18,7 @@ public class base_calculator extends AppCompatActivity {
 
     private EditText editText;
     private TextView decimalText, binaryText, octalText, hexText;
-    private Button submitButton, clearButton;
+    private Button submitButton,backspaceButton,clearButton;
     private Button num1Button, num2Button, num3Button, num4Button;
     private Button num5Button, num6Button, num7Button, num8Button, num9Button, zeroButton;
     private Button btnA, btnB, btnC, btnD, btnE, btnF;
@@ -41,8 +41,9 @@ public class base_calculator extends AppCompatActivity {
         octalText = findViewById(R.id.octaltext);
         hexText = findViewById(R.id.hextext);
 
-        clearButton = findViewById(R.id.clear_text);
+        backspaceButton = findViewById(R.id.backspaceButton);
         submitButton = findViewById(R.id.submit);
+        clearButton = findViewById(R.id.clear_text);
 
         num1Button = findViewById(R.id.num1);
         num2Button = findViewById(R.id.num2);
@@ -71,13 +72,23 @@ public class base_calculator extends AppCompatActivity {
         setupNumberButtons();
 
         // Setup Clear Button
-        clearButton.setOnClickListener(new View.OnClickListener() {
+        backspaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String currentText = editText.getText().toString();
                 if (currentText.length() > 0) {
                     editText.setText(currentText.substring(0, currentText.length() - 1));
                 }
+            }
+        });
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText("");
+                decimalText.setText("0");
+                binaryText.setText("0");
+                octalText.setText("0");
+                hexText.setText("0");
             }
         });
 

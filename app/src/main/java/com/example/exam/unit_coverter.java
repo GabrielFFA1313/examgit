@@ -24,15 +24,15 @@ public class unit_coverter extends AppCompatActivity {
     private Button num0, num1, num2, num3, num4, num5, num6, num7, num8, num9, dotButton;
 
     // Conversion rates for Money
-//    These conversion are as of Oct 5
+//    These conversion are as of Oct 6 3:05 pm
 //    these conversion are from https://wise.com/gb/currency-converter
 //    The website is live so teh exact amount may differ
-    private static final double PHP_TO_USD = 0.01724;
-    private static final double PHP_TO_EUR = 0.01469;
-    private static final double USD_TO_EUR = 0.8516;
-    private static final double USD_TO_PHP = 57.99;
-    private static final double EUR_TO_PHP = 68.09;
-    private static final double EUR_TO_USD = 1.174;
+    private static final double PHP_TO_USD = 0.01717;
+    private static final double PHP_TO_EUR = 0.01468 ;
+    private static final double USD_TO_EUR = 0.8552;
+    private static final double USD_TO_PHP = 58.24;
+    private static final double EUR_TO_PHP = 68.12;
+    private static final double EUR_TO_USD = 1.170;
 
     private String currentCategory = "Money";
     private String currentUnit1 = "PHP";
@@ -141,9 +141,9 @@ public class unit_coverter extends AppCompatActivity {
             currentUnit1 = "Celsius";
             currentUnit2 = "Fahrenheit";
         } else if (category.equals("Speed")) {
-            units = new String[]{"Kilometer", "Meter", "Miles"};
+            units = new String[]{"Kilometer", "Miles"};  // Changed: Removed "Meter"
             currentUnit1 = "Kilometer";
-            currentUnit2 = "Meter";
+            currentUnit2 = "Miles";  // Changed: Default to Miles instead of Meter
         }
 
         ArrayAdapter<String> unitAdapter = new ArrayAdapter<>(this,
@@ -161,7 +161,7 @@ public class unit_coverter extends AppCompatActivity {
             switchUnit2.setSelection(1); // Fahrenheit
         } else if (category.equals("Speed")) {
             switchUnit1.setSelection(0); // Kilometer
-            switchUnit2.setSelection(1); // Meter
+            switchUnit2.setSelection(1); // Miles
         }
 
         setupUnitSpinnerListeners();
@@ -405,23 +405,11 @@ public class unit_coverter extends AppCompatActivity {
             return value;
         }
 
-        // Convert to meters first
-        double meters = 0;
-        if (fromUnit.equals("Meter")) {
-            meters = value;
-        } else if (fromUnit.equals("Kilometer")) {
-            meters = value * 1000;
-        } else if (fromUnit.equals("Miles")) {
-            meters = value * 1609.34;
-        }
-
-        // Convert from meters to target unit
-        if (toUnit.equals("Meter")) {
-            return meters;
-        } else if (toUnit.equals("Kilometer")) {
-            return meters / 1000;
-        } else if (toUnit.equals("Miles")) {
-            return meters / 1609.34;
+        // Direct conversion between Kilometer and Miles
+        if (fromUnit.equals("Kilometer") && toUnit.equals("Miles")) {
+            return value * 0.621371;  // km to miles
+        } else if (fromUnit.equals("Miles") && toUnit.equals("Kilometer")) {
+            return value * 1.60934;  // miles to km
         }
 
         return value;

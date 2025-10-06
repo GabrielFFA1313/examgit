@@ -80,6 +80,17 @@
                 android:textColor="#FFFFFF"
                 android:text=")" />
 
+
+
+            <Button
+                android:id="@+id/clear_text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:textSize="10sp"
+                android:textColor="#FFFFFF"
+                android:text="CE" />
+
             <Button
                 android:id="@+id/backspace"
                 android:layout_width="50dp"
@@ -88,15 +99,6 @@
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:text="⌫" />
-
-            <Button
-                android:id="@+id/clear_text"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#000000"
-                android:textSize="15sp"
-                android:textColor="#FFFFFF"
-                android:text="CE" />
         </TableRow>
 
         <TableRow

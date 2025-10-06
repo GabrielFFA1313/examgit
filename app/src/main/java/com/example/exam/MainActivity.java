@@ -97,28 +97,28 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendOperator(" + ");
+                appendOperator("+");
             }
         });
 
         subtractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendOperator(" - ");
+                appendOperator("-");
             }
         });
 
         multiplyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendOperator(" * ");
+                appendOperator("*");
             }
         });
 
         divideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendOperator(" / ");
+                appendOperator("/");
             }
         });
 
@@ -257,6 +257,34 @@ public class MainActivity extends AppCompatActivity {
     private double evaluateExpression(String expression) {
         expression = expression.replaceAll(" ", "");
 
+        /* Add implicit multiplication (if there is a a parenthesis without a operand outside of it
+           it will add "*" to the algorithm
+         */
+        StringBuilder processed = new StringBuilder();
+        for (int i = 0; i < expression.length(); i++) {
+            char current = expression.charAt(i);
+            processed.append(current);
+
+            // Check if we need to insert multiplication
+            if (i < expression.length() - 1) {
+                char next = expression.charAt(i + 1);
+
+                // Case 1: number followed by opening parenthesis: 2( -> 2*(
+                if ((Character.isDigit(current) || current == '.') && next == '(') {
+                    processed.append('*');
+                }
+                // Case 2: closing parenthesis followed by opening parenthesis: )( -> )*(
+                else if (current == ')' && next == '(') {
+                    processed.append('*');
+                }
+                // Case 3: closing parenthesis followed by number: )2 -> )*2
+                else if (current == ')' && (Character.isDigit(next) || next == '.')) {
+                    processed.append('*');
+                }
+            }
+        }
+        expression = processed.toString();
+
         Stack<Double> numbers = new Stack<>();
         Stack<Character> operators = new Stack<>();
 
@@ -352,7 +380,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void spinner_switch() {
-        String[] spinneroption = {"Basic Calculator", "Base_Number", "Unit_converter"};
+        String[] spinneroption = {"Basic Calculator", "Base Number", "Unit Converter"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinneroption);
 
@@ -367,14 +395,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
-                if (selectedItem.equals("Base_Number")) {
+                if (selectedItem.equals("Base Number")) {
                     Intent intent = new Intent(MainActivity.this, base_calculator.class);
                     startActivity(intent);
-                }
-                else if (selectedItem.equals("Unit_converter")){
+                } else if (selectedItem.equals("Unit Converter")) {
                     Intent intent = new Intent(MainActivity.this, unit_coverter.class);
                     startActivity(intent);
-                }
+                    }
             }
 
             @Override

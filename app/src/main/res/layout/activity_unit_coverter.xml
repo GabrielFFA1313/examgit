@@ -95,25 +95,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/switchbutton"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#000000"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:text="⥤" />
 
-
-
-            <Button
-                android:id="@+id/backspace"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#000000"
-                android:textSize="15sp"
-                android:textColor="#FFFFFF"
-                android:text="⌫" />
 
             <Button
                 android:id="@+id/clear_text"
@@ -123,6 +105,14 @@
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:text="CE" />
+            <Button
+                android:id="@+id/backspace"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:text="⌫" />
         </TableRow>
 
         <TableRow
@@ -249,6 +239,14 @@
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:text="0" />
+            <Button
+                android:id="@+id/switchbutton"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:text="⥤" />
         </TableRow>
         <Button
             android:id="@+id/submit"
@@ -258,6 +256,7 @@
             android:textSize="20sp"
             android:textColor="#FFFFFF"
             android:text="Submit" />
+
 
     </TableLayout>
 
